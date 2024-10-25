@@ -1,17 +1,25 @@
 <% layout('/layouts/boilerplate.ejs') -%>
 <div class="row">
   <div class="col-8 offset-2 mt-5">
-    <h3>Create A New Listing</h3>
-    <form method="POST" action="/listings">
+    <h3>Edit Your Listing</h3>
+    <form
+      method="POST"
+      action="/listings/<%= listing._id %>?_method=PUT"
+      novalidate
+      class="needs-validation"
+    >
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
         <input
           type="text"
           name="listing[title]"
-          placeholder="Add a catchy title"
+          value="<%= listing.title %>"
           class="form-control"
           id="title"
+          required
         />
+        <div class="valid-feedback">Title looks good!</div>
+        <div class="invalid-feedback">Please enter a catchy title!</div>
       </div>
 
       <div class="mb-3">
@@ -20,7 +28,11 @@
           name="listing[description]"
           id="description"
           class="form-control"
-        ></textarea>
+          required
+        >
+<%= listing.description %></textarea
+        >
+        <div class="invalid-feedback">Please enter a short description!</div>
       </div>
 
       <div class="mb-3">
@@ -28,10 +40,12 @@
         <input
           type="text"
           name="listing[image]"
-          placeholder="Enter image URL/Link"
+          value="<%= listing.image %>"
           id="image"
           class="form-control"
+          required
         />
+        <div class="invalid-feedback">Please enter a valid Link!</div>
       </div>
 
       <div class="row">
@@ -40,10 +54,12 @@
           <input
             type="number"
             name="listing[price]"
-            placeholder="1200"
+            value="<%= listing.price %>"
             id="price"
             class="form-control"
+            required
           />
+          <div class="invalid-feedback">Price should be valid</div>
         </div>
 
         <div class="mb-3 col-md-8">
@@ -51,10 +67,12 @@
           <input
             type="text"
             name="listing[country]"
-            placeholder="India"
+            value="<%= listing.country %>"
             id="country"
             class="form-control"
+            required
           />
+          <div class="invalid-feedback">Country should be valid</div>
         </div>
       </div>
 
@@ -63,12 +81,14 @@
         <input
           type="text"
           name="listing[location]"
-          placeholder="Jaiput, Rajasthan"
+          value="<%= listing.location %>"
           id="location"
           class="form-control"
+          required
         />
+        <div class="invalid-feedback">Location should be valid</div>
       </div>
-      <button class="btn btn-dark add-btn mt-2">Add</button>
+      <button class="btn btn-dark edit-btn mt-2">Edit</button>
     </form>
   </div>
 </div>
